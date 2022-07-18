@@ -16,11 +16,10 @@ public class PoolManager : MonoBehaviour
             INSTANCE = this;
         }
     }
-    private void Start()
-    {
-        CreatePool();
-    }
-    private void CreatePool()
+    /// <summary>
+    /// Create ball pool for gameplay
+    /// </summary>
+    public void CreatePool()
     {
         for(int i=0;i<poolSize;i++)
         {

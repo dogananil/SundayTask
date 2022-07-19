@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+
+    public static LevelManager INSTANCE;
     [SerializeField] private List<Level> levels = new List<Level>();
     [SerializeField] private GameObject cup;
     private GameObject levelCup;
     private List<Level> levelPool = new List<Level>();
+    public Level currentLevel;
 
-    private void Start()
+
+    private void Awake()
+    {
+     if(INSTANCE==null)
+        {
+            INSTANCE = this;
+        }
+    }
+    public void StartLevelManager()
     {
         CreateCup();
         CreateLevelPool();
@@ -40,6 +51,7 @@ public class LevelManager : MonoBehaviour
         levelCup.SetActive(true);
         levelPool[levelNumber].ResetLevel();
         levelPool[levelNumber].gameObject.SetActive(true);
+        currentLevel = levelPool[levelNumber];
     }
     
 }

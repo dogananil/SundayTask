@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         SetPlayerPrefs();
-        GetComponent<LevelManager>().CreateLevel(levelNumber);
+        LevelManager.INSTANCE.StartLevelManager();
+        LevelManager.INSTANCE.CreateLevel(levelNumber);
     }
     private void SetPlayerPrefs()
     {

@@ -8,6 +8,7 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private Ball ballPrefab;
     [SerializeField] private int poolSize;
     public List<Ball> ballPool = new List<Ball>();
+    [SerializeField] private List<Color> colors = new List<Color>();
 
     private void Awake()
     {
@@ -25,6 +26,10 @@ public class PoolManager : MonoBehaviour
         {
             Ball newBall = Instantiate(ballPrefab, this.transform);
             newBall.gameObject.SetActive(false);
+            MaterialPropertyBlock materialProperty = new MaterialPropertyBlock();
+            int randomIndex = Random.Range(0, colors.Count);
+            materialProperty.SetColor("_Color",colors[randomIndex]);
+            newBall.GetComponent<MeshRenderer>().SetPropertyBlock(materialProperty);
             ballPool.Add(newBall);
         }
     }

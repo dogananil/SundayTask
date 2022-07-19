@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 601824262}
   - component: {fileID: 601824263}
+  - component: {fileID: 601824264}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -164,6 +165,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a5288d5c5e8f0b429c96b13004893d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &601824264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601824261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a701b77192a54f438655d3bdbd96a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &705507993
@@ -311,8 +324,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 22.36
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -336,7 +349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 18.19, z: -30.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -374,6 +387,17 @@ MonoBehaviour:
   ballPrefab: {fileID: 1206039643043324154, guid: d33f34b5a2522094284f9306e2167323, type: 3}
   poolSize: 100
   ballPool: []
+  colors:
+  - {r: 0.8431373, g: 0.43529415, b: 0.5568628, a: 0}
+  - {r: 0.7568628, g: 0.5803922, b: 0.7411765, a: 0}
+  - {r: 0.8431373, g: 0.5176471, b: 0.28235295, a: 0}
+  - {r: 0.5411765, g: 0.4431373, b: 0.6745098, a: 0}
+  - {r: 0.81568635, g: 0.37647063, b: 0.26666668, a: 0}
+  - {r: 0.95294124, g: 0.73333335, b: 0.30588236, a: 0}
+  - {r: 0.45882356, g: 0.5686275, b: 0.7725491, a: 0}
+  - {r: 0.48235297, g: 0.73333335, b: 0.8980393, a: 0}
+  - {r: 0.5411765, g: 0.74509805, b: 0.3803922, a: 0}
+  - {r: 0.47058827, g: 0.74509805, b: 0.627451, a: 0}
 --- !u!4 &1116147978
 Transform:
   m_ObjectHideFlags: 0

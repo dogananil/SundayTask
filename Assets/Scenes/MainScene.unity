@@ -179,6 +179,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a701b77192a54f438655d3bdbd96a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels:
+  - {fileID: -6088860155779082633, guid: b47bc1d5787ce834194d86e61fb58a1e, type: 3}
+  - {fileID: -6906505977698036764, guid: f193df2a053063744bbc6f4182077b9f, type: 3}
+  - {fileID: 4384047675025731886, guid: 422b0679209dfac42bb16727ee0693fc, type: 3}
+  cup: {fileID: 7176609125911818217, guid: 6718dadd99222844ab13be93c196a449, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,8 +312,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -324,7 +329,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 22.36
   m_Depth: -1
   m_CullingMask:
@@ -349,7 +354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 18.19, z: -30.51}
+  m_LocalPosition: {x: 0, y: 13.69, z: -34.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

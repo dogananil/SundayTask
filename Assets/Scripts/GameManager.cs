@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+    private int levelNumber;
     void Start()
     {
         //First we should create our ball pool for level creation
@@ -17,7 +17,12 @@ public class GameManager : MonoBehaviour
     }
     private void StartGame()
     {
-
+        SetPlayerPrefs();
+        GetComponent<LevelManager>().CreateLevel(levelNumber);
+    }
+    private void SetPlayerPrefs()
+    {
+        levelNumber = PlayerPrefs.GetInt("LevelNumber", 0);
     }
 
    

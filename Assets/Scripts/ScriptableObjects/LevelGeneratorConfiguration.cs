@@ -9,7 +9,7 @@ public class LevelGeneratorConfiguration : ScriptableSingleton<LevelGeneratorCon
 {
     
     [Header("Level SVG Sprites")]
-    public List<Sprite> levels = new List<Sprite>();
+    public List<Level> levels = new List<Level>();
     [Header("Tube Prefab")]
     public Level tube;
     [Header("Tube Material")]

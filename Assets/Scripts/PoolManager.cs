@@ -5,32 +5,19 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     public static PoolManager INSTANCE;
-    [SerializeField] private Ball ballPrefab;
-    [SerializeField] private int poolSize;
-    public List<Ball> ballPool = new List<Ball>();
-    [SerializeField] private List<Color> colors = new List<Color>();
-
+    [SerializeField] private BallPool ballPool;
+    [SerializeField] private LevelGenerator levelGenerator;
     private void Awake()
     {
-        if(INSTANCE==null)
+        if (INSTANCE == null)
         {
             INSTANCE = this;
         }
     }
-    /// <summary>
-    /// Create ball pool for gameplay
-    /// </summary>
-    public void CreatePool()
+    public void CreatePools()
     {
-        for(int i=0;i<poolSize;i++)
-        {
-            Ball newBall = Instantiate(ballPrefab, this.transform);
-            newBall.gameObject.SetActive(false);
-            MaterialPropertyBlock materialProperty = new MaterialPropertyBlock();
-            int randomIndex = Random.Range(0, colors.Count);
-            materialProperty.SetColor("_Color",colors[randomIndex]);
-            newBall.GetComponent<MeshRenderer>().SetPropertyBlock(materialProperty);
-            ballPool.Add(newBall);
-        }
+        ballPool.CreatePool();
+        LevelManager.INSTANCE.CreateLevelPool(levelGenerator.transform);
+        levelGenerator.CreateLevels();
     }
 }

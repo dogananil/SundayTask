@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<Level> levels = new List<Level>();
     [SerializeField] private GameObject cup;
     private GameObject levelCup;
-    private List<Level> levelPool = new List<Level>();
+    public List<Level> levelPool = new List<Level>();
     public Level currentLevel;
 
 
@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
     public void StartLevelManager()
     {
         CreateCup();
-        CreateLevelPool();
+        
     }
     /// <summary>
     /// Create cup at start of the game
@@ -33,11 +33,11 @@ public class LevelManager : MonoBehaviour
         levelCup = Instantiate(cup);
         levelCup.SetActive(false); 
     }
-    private void CreateLevelPool()
+    public void CreateLevelPool(Transform poolParentTransform)
     {
         for(int i=0;i<levels.Count;i++)
         {
-            Level newLevel = Instantiate(levels[i]);
+            Level newLevel = Instantiate(levels[i], poolParentTransform);
             newLevel.gameObject.SetActive(false);
             levelPool.Add(newLevel);
         }

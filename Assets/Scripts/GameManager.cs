@@ -7,19 +7,21 @@ public class GameManager : MonoBehaviour
     private int levelNumber;
     void Start()
     {
-        //First we should create our ball pool for level creation
-        PoolManager.INSTANCE.CreatePool();
-        //Second we should create level
-
+        //Firstly we should create our ball pool for level creation
+        PoolManager.INSTANCE.CreatePools();
+        //Secondly we should get player prefs
+        SetPlayerPrefs();
+        //Thirdly we should start levelmanager and create level
+        LevelManager.INSTANCE.StartLevelManager();
+        LevelManager.INSTANCE.CreateLevel(levelNumber);
         //Finally we can start our game
         StartGame();
 
     }
     private void StartGame()
     {
-        SetPlayerPrefs();
-        LevelManager.INSTANCE.StartLevelManager();
-        LevelManager.INSTANCE.CreateLevel(levelNumber);
+        
+       
     }
     private void SetPlayerPrefs()
     {

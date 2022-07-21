@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7796ae03817f59a47baa7aafff1f2fad, type: 3}
+  m_Name: Level Generator Configurations
+  m_EditorClassIdentifier: 
+  levels:
+  - {fileID: 3286163911610860551, guid: 2d090e1f10063d04a82a6353fd83d394, type: 3}
+  - {fileID: 3286163911610860551, guid: ee11d44cecffc934ab5c2f6259340617, type: 3}
+  - {fileID: 3286163911610860551, guid: 8f2bd7da86404c349b74805a81dd91db, type: 3}
+  tube: {fileID: -4202537474140827977, guid: e423ca0066159054d966917c83b747bd, type: 3}
+  tubeMaterial: {fileID: 2100000, guid: d8463dd34c24baf45b070e49d7792269, type: 2}

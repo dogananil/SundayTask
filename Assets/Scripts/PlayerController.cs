@@ -26,24 +26,21 @@ public class PlayerController : MonoBehaviour
         touchPos = context.ReadValue<Vector2>();
         if (prevTouchPos==Vector2.zero)
         {
-            Debug.Log("Prev zero");
             prevTouchPos = touchPos;
         }
         else
         {
            firstLine= screenPos - prevTouchPos;
             secondLine = screenPos - touchPos;
-            float angle = Vector2.SignedAngle(firstLine, secondLine);
-            Debug.Log("Rotate");
-            LevelManager.INSTANCE.currentLevel.transform.Rotate(Vector3.back, angle);
-
+            float angle = Vector2.SignedAngle(firstLine, secondLine);           
+            LevelManager.INSTANCE.currentLevel.transform.Rotate(Vector3.back, angle*PlayerControllerConfigurations.Instance.rotationSpeed);
             prevTouchPos = touchPos;
         }
  
     }
     private void ResetPrevTouch(InputAction.CallbackContext context)
     {
-        Debug.Log("sdasd");
+       
         prevTouchPos = Vector2.zero;
     }
    

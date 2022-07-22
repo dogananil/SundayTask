@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    private bool countedForEntry,countedForLoose;
+    
     public void RandomSpawn(Transform spawnPoint,Transform parent)
     {
         this.transform.SetParent(parent);
@@ -18,9 +20,26 @@ public class Ball : MonoBehaviour
         if(collision.tag=="TubeExit")
         {
             this.transform.SetParent(PoolManager.INSTANCE.ballPool.transform);
+            LevelManager.INSTANCE.currentLevel.CountBallTubeExit();
         }
+        else if(collision.tag=="CupEntry" && !countedForEntry)
+        {
+            countedForEntry = true;
+            LevelManager.INSTANCE.currentLevel.CountBallInTheCup();
+        }
+        else if(collision.tag=="LooseBall" && !countedForLoose)
+        {
+            countedForLoose = true;
+            LevelManager.INSTANCE.currentLevel.LooseBall();
+        }
+        
     }
-    
-   
+    public void ResetBall()
+    {
+        countedForEntry = false;
+        countedForLoose = false;
+    }
+
+
 
 }

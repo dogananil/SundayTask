@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2830809523603997087
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -8,14 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Glass
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e1cfdf829c520bd4f85b12da51075d97, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
   m_SavedProperties:
@@ -78,6 +90,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_056f796a30764ee796110afc6027ed11: 0.05
+    - Vector1_1e36f7fe42df4e0a921bf78052453971: 5
+    - Vector1_1f357f590bcc41b2ada2b9cf2ff84869: 2.78
+    - Vector1_2e0cca5aeed744bcbceee5d353372012: 2
+    - Vector1_33af6130845c4a93853b30243e730793: 1
+    - Vector1_3cd12fa6b39947f1ad23a4468797449d: 0.8
+    - Vector1_688836c69e6c429790fbaf043855b28f: 0.5
+    - Vector1_d2ec8e53ce214035bc5ea122cfe27f74: 1.75
+    - Vector1_de11590471f1490f99e813a7bf63037b: 0.99
+    - Vector1_f4ecec5cfcce4c0a984a57b9d3e098cf: 0
+    - Vector1_f6e76f0c52e24be9b75377473210fc6e: 0.05
+    - Vector1_f7e5ba0f84564df89ce91291e4bc0092: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BlurStrength: 1
@@ -111,6 +135,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
+    - Color_3da73a51ca844396ab4ef0aa925ee225: {r: 0.14346743, g: 0.9811321, b: 0.66314036, a: 0}
+    - Color_488e45433ec242f791826271a442510a: {r: 0, g: 1, b: 0.5286541, a: 0}
+    - Color_73e29882df5b49ccb539b8dbc8d572e4: {r: 0.504717, g: 1, b: 0.8702607, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0.5254902}
     - _Color: {r: 0, g: 1, b: 0.73333335, a: 0.5882353}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

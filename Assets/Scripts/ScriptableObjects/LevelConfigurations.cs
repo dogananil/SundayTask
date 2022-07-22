@@ -7,4 +7,8 @@ public class LevelConfigurations : SingletonScriptableObjects<LevelConfiguration
 {
     [Header("Level Ball Number")]
     public List<int> ballSize = new List<int>();
+    [Header("Desired Ball Number")]
+    public List<int> ballNumber = new List<int>();
+    [Header("Start Ball Spawn Time")]
+    public float spawnWaitTime;
 }

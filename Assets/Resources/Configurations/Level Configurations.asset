@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Level Configurations
   m_EditorClassIdentifier: 
   ballSize: 0a0000000f00000014000000190000001e00000023000000
+  ballNumber: 0a0000000f0000001200000014000000190000001e000000
+  spawnWaitTime: 0.1

@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void RandomSpawn(Transform spawnPoint,Transform parent)
     {
-        
+        this.transform.SetParent(parent);
+        this.gameObject.SetActive(true);
+        Vector3 random = (Vector3)Random.insideUnitCircle;
+
+        transform.position = random + spawnPoint.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider collision)
     {
-        
+        if(collision.tag=="TubeExit")
+        {
+            this.transform.SetParent(PoolManager.INSTANCE.ballPool.transform);
+        }
     }
+    
+   
+
 }

@@ -8,7 +8,9 @@ public class LevelGenerator : MonoBehaviour
 {
     
     
-
+    /// <summary>
+    /// Create Levels from svg files and add to pool
+    /// </summary>
     public void CreateLevels()
     {
        

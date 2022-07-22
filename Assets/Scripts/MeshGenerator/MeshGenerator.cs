@@ -10,16 +10,20 @@ public class MeshGenerator : MonoBehaviour
     List<Vector3> verticesOrder = new List<Vector3>();
     [SerializeField] private Sprite _levelSprite;
     private MeshFilter _meshFilter;
-
+    private MeshCollider _meshCollider;
 
     private void Awake()
     {
         _meshFilter = GetComponent<MeshFilter>();
+        _meshCollider = GetComponent<MeshCollider>();
     }
     private void Start()
     {
         CreateMesh();
     }
+    /// <summary>
+    /// Create mesh from svg file
+    /// </summary>
     private void CreateMesh( )
     {
 
@@ -28,10 +32,17 @@ public class MeshGenerator : MonoBehaviour
         UpdateMesh(verticesOrder.ToArray(), triangles);
 
     }
-    private List<Vector3> GetCircleVertices(float radius, float offsetAngle, Vector2 location)
+    /// <summary>
+    /// Calculate circular vertices for mesh creating
+    /// </summary>
+    /// <param name="radius"></param>
+    /// <param name="offsetAngle"></param>
+    /// <param name="location"></param>
+    /// <returns></returns>
+    private List<Vector3> GetCircleVertices( float offsetAngle, Vector2 location)
     {
         List<Vector3> circleVertices = new List<Vector3>();
-
+        float radius = this.transform.name == "CreatedOuterTube" ? 1.2f:1.0f;
         int edges = 24;
         float pieceOfCircle = (2 * Mathf.PI) / edges;
         float angle = 0.0f;
@@ -52,6 +63,10 @@ public class MeshGenerator : MonoBehaviour
         }
         return circleVertices;
     }
+    /// <summary>
+    /// Get Vertices order for triangles
+    /// </summary>
+    /// <param name="svgVertices"></param>
     private void GetVerticesOrder(Vector2[] svgVertices)
     {
         List<List<Vector3>> circleList = new List<List<Vector3>>();
@@ -67,7 +82,7 @@ public class MeshGenerator : MonoBehaviour
                 angle = Mathf.Atan(tan);
                 continue;
             }
-            circleList.Add(GetCircleVertices(1f, angle, svgVertices[i]));
+            circleList.Add(GetCircleVertices( angle, svgVertices[i]));
 
         }
         for (int i = 0; i < circleList.Count - 1; i++)
@@ -75,6 +90,11 @@ public class MeshGenerator : MonoBehaviour
             CalculateVerticesOrderBetweenCircles(circleList[i], circleList[i + 1]);
         }
     }
+    /// <summary>
+    /// Create vertices list
+    /// </summary>
+    /// <param name="prevCircle"></param>
+    /// <param name="nextCircle"></param>
     private void CalculateVerticesOrderBetweenCircles(List<Vector3> prevCircle, List<Vector3> nextCircle)
     {
 
@@ -118,6 +138,11 @@ public class MeshGenerator : MonoBehaviour
 
 
     }
+    /// <summary>
+    /// Allocate memory for Mesh data and update mesh
+    /// </summary>
+    /// <param name="vertices"></param>
+    /// <param name="triangles"></param>
     private void UpdateMesh(Vector3[] vertices, int[] triangles)
     {
         var dataArray = Mesh.AllocateWritableMeshData(1);
@@ -145,7 +170,7 @@ public class MeshGenerator : MonoBehaviour
         newMesh.RecalculateBounds();
         _meshFilter.mesh = newMesh;
 
-
+        _meshCollider.sharedMesh = _meshFilter.mesh;
 
         
         

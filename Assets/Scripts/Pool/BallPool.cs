@@ -20,9 +20,12 @@ public class BallPool : MonoBehaviour
         {
             Ball newBall = Instantiate(BallPoolConfigurations.Instance.ballPrefab, this.transform);
             newBall.gameObject.SetActive(false);
-            MaterialPropertyBlock materialProperty = new MaterialPropertyBlock();
+            
             int randomIndex = Random.Range(0, BallPoolConfigurations.Instance.colors.Count);
-            materialProperty.SetColor("_Color", BallPoolConfigurations.Instance.colors[randomIndex]);
+            var renderer = newBall.GetComponent<Renderer>();
+            renderer.material.SetColor("_MainColor",BallPoolConfigurations.Instance.colors[randomIndex]);
+            MaterialPropertyBlock materialProperty = new MaterialPropertyBlock();
+            materialProperty.SetColor("MainColor", BallPoolConfigurations.Instance.colors[randomIndex]);
             newBall.GetComponent<MeshRenderer>().SetPropertyBlock(materialProperty);
             ballPool.Add(newBall);
         }

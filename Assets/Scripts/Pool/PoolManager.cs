@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     public static PoolManager INSTANCE;
-    [SerializeField] private BallPool ballPool;
+    public BallPool ballPool;
     [SerializeField] private LevelGenerator levelGenerator;
     private void Awake()
     {
@@ -14,6 +14,9 @@ public class PoolManager : MonoBehaviour
             INSTANCE = this;
         }
     }
+    /// <summary>
+    /// Create ball and level pool for game
+    /// </summary>
     public void CreatePools()
     {
         ballPool.CreatePool();

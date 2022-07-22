@@ -48,10 +48,23 @@ public class LevelManager : MonoBehaviour
     /// <param name="levelNumber"></param>
     public void CreateLevel(int levelNumber)
     {
+        levelNumber = 4;
         levelCup.SetActive(true);
         levelPool[levelNumber].ResetLevel();
         levelPool[levelNumber].gameObject.SetActive(true);
         currentLevel = levelPool[levelNumber];
+        StartCoroutine(SpawnLevelBalls(LevelConfigurations.Instance.ballSize[levelNumber], 0.2f));
+    }
+    private IEnumerator SpawnLevelBalls(int ballNumber,float spawnWaitTime)
+    {
+        int i = 0;
+        while(i<ballNumber)
+        {
+
+            PoolManager.INSTANCE.ballPool.ballPool[i].RandomSpawn(currentLevel.ballSpawnPoint,currentLevel.transform);
+            i++;
+            yield return new WaitForSeconds(spawnWaitTime);
+        }
     }
     
 }

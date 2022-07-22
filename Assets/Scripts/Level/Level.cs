@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    public MeshFilter meshFilter;
+   
+    public Transform ballSpawnPoint;
+
     public void ResetLevel()
     {
         this.transform.position = new Vector3(0, 20, 0);

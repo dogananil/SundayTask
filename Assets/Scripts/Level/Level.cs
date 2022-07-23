@@ -29,9 +29,9 @@ public class Level : MonoBehaviour
     {
        
         _ballNumberInTheCup++;
+        
         if(_tubeExitBallNumber == _levelBallNumber && (_looseBallNumber+_ballNumberInTheCup)==_tubeExitBallNumber)
         {
-            Debug.Log("Win Game with " + _ballNumberInTheCup + " number of balls");
             FinishLevel();
            
         }
@@ -41,7 +41,6 @@ public class Level : MonoBehaviour
         _looseBallNumber++;
         if (_tubeExitBallNumber == _levelBallNumber && (_looseBallNumber + _ballNumberInTheCup) == _tubeExitBallNumber)
         {
-            Debug.Log("Loose Game with " + _looseBallNumber + " number of balls");
             FinishLevel();
             
         }

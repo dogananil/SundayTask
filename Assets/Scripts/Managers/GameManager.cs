@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         if(!_levelFinish)
         {
-            Debug.Log("Win the GAME");
+         
             levelNumber++;
             PlayerPrefs.SetInt("LevelNumber", levelNumber);
         }
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         if(!_levelFinish)
         {
-            Debug.Log("Loose the GAME");
+            
         }
 
         _levelFinish = true;

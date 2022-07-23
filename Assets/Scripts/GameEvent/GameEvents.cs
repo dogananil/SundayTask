@@ -30,4 +30,12 @@ public class GameEvents : MonoBehaviour
             looseGame();
         }
     }
+    public event Action nextLevel;
+    public void NextLevel()
+    {
+        if(nextLevel!=null)
+        {
+            nextLevel();
+        }
+    }
 }

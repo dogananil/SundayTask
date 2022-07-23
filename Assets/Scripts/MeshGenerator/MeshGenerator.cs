@@ -10,12 +10,12 @@ public class MeshGenerator : MonoBehaviour
     List<Vector3> verticesOrder = new List<Vector3>();
     [SerializeField] private Sprite _levelSprite;
     private MeshFilter _meshFilter;
-    private MeshCollider _meshCollider;
+    private const float VERTEX_MARGIN = 0.015f;
 
     private void Awake()
     {
         _meshFilter = GetComponent<MeshFilter>();
-        _meshCollider = GetComponent<MeshCollider>();
+       
     }
     private void Start()
     {
@@ -26,9 +26,17 @@ public class MeshGenerator : MonoBehaviour
     /// </summary>
     private void CreateMesh( )
     {
-
+        
         GetVerticesOrder(_levelSprite.vertices);
+        if(this.transform.name != "CreatedOuterTube")
+        {
+            List<Vector3> vertices = verticesOrder;
+            vertices.Reverse();
+            verticesOrder.AddRange(vertices);
+        }
+        
         int[] triangles = Enumerable.Range(0, verticesOrder.Count).ToArray();
+   
         UpdateMesh(verticesOrder.ToArray(), triangles);
 
     }
@@ -69,6 +77,7 @@ public class MeshGenerator : MonoBehaviour
     /// <param name="svgVertices"></param>
     private void GetVerticesOrder(Vector2[] svgVertices)
     {
+       
         List<List<Vector3>> circleList = new List<List<Vector3>>();
 
         float angle = 0;
@@ -170,10 +179,12 @@ public class MeshGenerator : MonoBehaviour
         newMesh.RecalculateBounds();
         _meshFilter.mesh = newMesh;
 
-        _meshCollider.sharedMesh = _meshFilter.mesh;
+        if(this.transform.name != "CreatedOuterTube")
+            this.gameObject.AddComponent<MeshCollider>();
 
         
         
       
     }
+    
 }

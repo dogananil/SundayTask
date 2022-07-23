@@ -70,6 +70,54 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""b32801fb-82ca-456c-bbbf-9979fe3f9a40"",
+            ""actions"": [
+                {
+                    ""name"": ""PressToContinue"",
+                    ""type"": ""Button"",
+                    ""id"": ""682d507b-a3d0-4358-800d-3a78d5449a3e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PressToTryAgain"",
+                    ""type"": ""Button"",
+                    ""id"": ""93306f90-803b-4bde-9714-0fa7d9870039"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8523b7fa-e843-4ddc-b456-560e0cd5e43a"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressToContinue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53b64bc9-8b09-426e-b52c-2ae813fa8100"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PressToTryAgain"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -78,6 +126,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_TouchPosition = m_Player.FindAction("TouchPosition", throwIfNotFound: true);
         m_Player_TouchStart = m_Player.FindAction("TouchStart", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_PressToContinue = m_UI.FindAction("PressToContinue", throwIfNotFound: true);
+        m_UI_PressToTryAgain = m_UI.FindAction("PressToTryAgain", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,9 +226,55 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_PressToContinue;
+    private readonly InputAction m_UI_PressToTryAgain;
+    public struct UIActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PressToContinue => m_Wrapper.m_UI_PressToContinue;
+        public InputAction @PressToTryAgain => m_Wrapper.m_UI_PressToTryAgain;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @PressToContinue.started -= m_Wrapper.m_UIActionsCallbackInterface.OnPressToContinue;
+                @PressToContinue.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnPressToContinue;
+                @PressToContinue.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnPressToContinue;
+                @PressToTryAgain.started -= m_Wrapper.m_UIActionsCallbackInterface.OnPressToTryAgain;
+                @PressToTryAgain.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnPressToTryAgain;
+                @PressToTryAgain.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnPressToTryAgain;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @PressToContinue.started += instance.OnPressToContinue;
+                @PressToContinue.performed += instance.OnPressToContinue;
+                @PressToContinue.canceled += instance.OnPressToContinue;
+                @PressToTryAgain.started += instance.OnPressToTryAgain;
+                @PressToTryAgain.performed += instance.OnPressToTryAgain;
+                @PressToTryAgain.canceled += instance.OnPressToTryAgain;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnTouchPosition(InputAction.CallbackContext context);
         void OnTouchStart(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnPressToContinue(InputAction.CallbackContext context);
+        void OnPressToTryAgain(InputAction.CallbackContext context);
     }
 }

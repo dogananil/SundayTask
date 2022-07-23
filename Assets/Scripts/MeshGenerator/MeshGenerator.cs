@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Rendering;
+using Unity.Collections;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class MeshGenerator : MonoBehaviour
@@ -10,7 +11,6 @@ public class MeshGenerator : MonoBehaviour
     List<Vector3> verticesOrder = new List<Vector3>();
     [SerializeField] private Sprite _levelSprite;
     private MeshFilter _meshFilter;
-    private const float VERTEX_MARGIN = 0.015f;
 
     private void Awake()
     {
@@ -28,18 +28,14 @@ public class MeshGenerator : MonoBehaviour
     {
         
         GetVerticesOrder(_levelSprite.vertices);
-        if(this.transform.name != "CreatedOuterTube")
-        {
-            List<Vector3> vertices = verticesOrder;
-            vertices.Reverse();
-            verticesOrder.AddRange(vertices);
-        }
+        
         
         int[] triangles = Enumerable.Range(0, verticesOrder.Count).ToArray();
    
         UpdateMesh(verticesOrder.ToArray(), triangles);
 
     }
+    
     /// <summary>
     /// Calculate circular vertices for mesh creating
     /// </summary>
@@ -114,9 +110,19 @@ public class MeshGenerator : MonoBehaviour
                 verticesOrder.Add(nextCircle[i]);
                 verticesOrder.Add(prevCircle[i]);
                 verticesOrder.Add(nextCircle[i + 1]);
+
+                verticesOrder.Add(nextCircle[i+1]);
+                verticesOrder.Add(prevCircle[i]);
+                verticesOrder.Add(nextCircle[i]);
+
                 verticesOrder.Add(nextCircle[i]);
                 verticesOrder.Add(prevCircle[prevCircle.Count - 1]);
                 verticesOrder.Add(prevCircle[i]);
+
+                verticesOrder.Add(prevCircle[i]);
+                verticesOrder.Add(prevCircle[prevCircle.Count - 1]);
+                verticesOrder.Add(nextCircle[i]);
+
             }
             else if (i != 0 && i != prevCircle.Count - 1)
             {
@@ -124,9 +130,17 @@ public class MeshGenerator : MonoBehaviour
                 verticesOrder.Add(prevCircle[i - 1]);
                 verticesOrder.Add(prevCircle[i]);
 
+                verticesOrder.Add(prevCircle[i]);
+                verticesOrder.Add(prevCircle[i - 1]);
+                verticesOrder.Add(nextCircle[i]);
+
                 verticesOrder.Add(nextCircle[i]);
                 verticesOrder.Add(prevCircle[i]);
                 verticesOrder.Add(nextCircle[i + 1]);
+
+                verticesOrder.Add(nextCircle[i + 1]);
+                verticesOrder.Add(prevCircle[i]);
+                verticesOrder.Add(nextCircle[i]);
 
             }
             else
@@ -135,9 +149,17 @@ public class MeshGenerator : MonoBehaviour
                 verticesOrder.Add(prevCircle[i - 1]);
                 verticesOrder.Add(prevCircle[i]);
 
+                verticesOrder.Add(prevCircle[i]);
+                verticesOrder.Add(prevCircle[i - 1]);
+                verticesOrder.Add(nextCircle[i]);
+
                 verticesOrder.Add(nextCircle[i]);
                 verticesOrder.Add(prevCircle[i]);
                 verticesOrder.Add(nextCircle[0]);
+
+                verticesOrder.Add(nextCircle[0]);
+                verticesOrder.Add(prevCircle[i]);
+                verticesOrder.Add(nextCircle[i]);
             }
 
         }
@@ -181,10 +203,6 @@ public class MeshGenerator : MonoBehaviour
 
         if(this.transform.name != "CreatedOuterTube")
             this.gameObject.AddComponent<MeshCollider>();
-
-        
-        
-      
     }
     
 }

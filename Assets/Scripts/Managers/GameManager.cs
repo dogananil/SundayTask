@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     }
     private void GetPlayerPrefs()
     {
-        levelNumber = PlayerPrefs.GetInt("LevelNumber", 0);
+        levelNumber = PlayerPrefs.GetInt("LevelNumber", 3);
     }
     public void WinGame()
     {

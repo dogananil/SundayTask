@@ -19,10 +19,11 @@ public class GameManager : MonoBehaviour
     {
         GameEvents.INSTANCE.winGame += WinGame;
         GameEvents.INSTANCE.looseGame+= LooseGame;
+        GameEvents.INSTANCE.startLevel += StartGame;
         //Firstly we should create our ball pool for level creation
         PoolManager.INSTANCE.CreatePools();
         //Secondly we should get player prefs
-        GetPlayerPrefs();
+        
         //Thirdly we should start levelmanager and create level
         LevelManager.INSTANCE.StartLevelManager();
         
@@ -32,24 +33,27 @@ public class GameManager : MonoBehaviour
     }
     private void StartGame()
     {
-        LevelManager.INSTANCE.CreateLevel(levelNumber);
+        GetPlayerPrefs();
+        _levelFinish = false;
+        LevelManager.INSTANCE.StartLevel(levelNumber);
 
     }
     private void GetPlayerPrefs()
     {
-        levelNumber = PlayerPrefs.GetInt("LevelNumber", 3);
+        levelNumber = PlayerPrefs.GetInt("LevelNumber", 0);
     }
-    public void WinGame()
+    private void WinGame()
     {
-        if(!_levelFinish)
+      
+        if (!_levelFinish)
         {
-         
+          
             levelNumber++;
             PlayerPrefs.SetInt("LevelNumber", levelNumber);
         }
         _levelFinish = true;
     }
-    public void LooseGame()
+    private void LooseGame()
     {
         if(!_levelFinish)
         {
@@ -58,6 +62,7 @@ public class GameManager : MonoBehaviour
 
         _levelFinish = true;
     }
+    
     
 
    

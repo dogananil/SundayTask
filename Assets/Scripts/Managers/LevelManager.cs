@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     public List<Level> levelPool = new List<Level>();
     public Level currentLevel;
 
+    private List<Ball> levelBalls = new List<Ball>();
+
 
     private void Awake()
     {
@@ -46,13 +48,17 @@ public class LevelManager : MonoBehaviour
     /// Create level for game by referencing level number
     /// </summary>
     /// <param name="levelNumber"></param>
-    public void CreateLevel(int levelNumber)
+    public void StartLevel(int levelNumber)
     {
 
         levelCup.SetActive(true);
+        if(currentLevel)
+            currentLevel.gameObject.SetActive(false);
+        currentLevel = levelPool[levelNumber];
+        currentLevel.gameObject.SetActive(true);
         levelPool[levelNumber].ResetLevel();
         levelPool[levelNumber].gameObject.SetActive(true);
-        currentLevel = levelPool[levelNumber];
+        ResetLevelBalls();
         StartCoroutine(SpawnLevelBalls(LevelConfigurations.Instance.ballSize[levelNumber], LevelConfigurations.Instance.spawnWaitTime));
     }
     private IEnumerator SpawnLevelBalls(int ballNumber,float spawnWaitTime)
@@ -62,8 +68,18 @@ public class LevelManager : MonoBehaviour
         {
             PoolManager.INSTANCE.ballPool.ballPool[i].ResetBall();
             PoolManager.INSTANCE.ballPool.ballPool[i].RandomSpawn(currentLevel.ballSpawnPoint,currentLevel.transform);
+            levelBalls.Add(PoolManager.INSTANCE.ballPool.ballPool[i]);
             i++;
             yield return new WaitForSeconds(spawnWaitTime);
+        }
+    }
+    private void ResetLevelBalls()
+    {
+        int count = levelBalls.Count;
+        for(int i=0;i<count;i++)
+        {
+            levelBalls[0].gameObject.SetActive(false);
+            levelBalls.RemoveAt(0);
         }
     }
     

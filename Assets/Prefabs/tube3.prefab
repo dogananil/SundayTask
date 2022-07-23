@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 7148122181238890963}
   m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 2280901234696647330}
   - {fileID: 5809858083880858335}
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballSpawnPoint: {fileID: 2280901234696647330}
+  _ballNumberInTheCup: 0
 --- !u!64 &2243170637531435923
 MeshCollider:
   m_ObjectHideFlags: 0

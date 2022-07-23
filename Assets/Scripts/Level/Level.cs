@@ -6,9 +6,11 @@ public class Level : MonoBehaviour
 {
    
     public Transform ballSpawnPoint;
-    private int _ballNumberInTheCup, _looseBallNumber,_tubeExitBallNumber;
+    public int _ballNumberInTheCup;
+    private int _looseBallNumber,_tubeExitBallNumber;
     private int _desiredBallForLevel, _levelBallNumber;
-   
+
+    
     public void ResetLevel()
     {
         int levelNumber = PlayerPrefs.GetInt("LevelNumber", 0);
@@ -17,7 +19,7 @@ public class Level : MonoBehaviour
         _tubeExitBallNumber = 0;
         _desiredBallForLevel= LevelConfigurations.Instance.ballNumber[levelNumber];
         _levelBallNumber = LevelConfigurations.Instance.ballSize[levelNumber];
-     
+        GameEvents.INSTANCE.BallToCup();
         this.transform.position = new Vector3(0, 20, 0);
         this.transform.rotation = Quaternion.Euler(0, -180, 0);
     }
@@ -27,10 +29,10 @@ public class Level : MonoBehaviour
     }
     public void CountBallInTheCup()
     {
-       
-        _ballNumberInTheCup++;
         
-        if(_tubeExitBallNumber == _levelBallNumber && (_looseBallNumber+_ballNumberInTheCup)==_tubeExitBallNumber)
+        _ballNumberInTheCup++;
+        GameEvents.INSTANCE.BallToCup();
+        if (_tubeExitBallNumber == _levelBallNumber && (_looseBallNumber+_ballNumberInTheCup)==_tubeExitBallNumber)
         {
             FinishLevel();
            

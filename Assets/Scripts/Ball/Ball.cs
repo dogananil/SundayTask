@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     {
         this.transform.SetParent(parent);
         this.gameObject.SetActive(true);
-        Vector3 random = (Vector3)Random.insideUnitCircle;
+        Vector3 random = (Vector3)Random.insideUnitCircle*0.5f;
 
         transform.position = random + spawnPoint.position;
     }
@@ -26,6 +26,7 @@ public class Ball : MonoBehaviour
         {
             countedForEntry = true;
             LevelManager.INSTANCE.currentLevel.CountBallInTheCup();
+            
         }
         else if(collision.tag=="LooseBall" && !countedForLoose)
         {

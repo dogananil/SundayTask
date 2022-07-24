@@ -5,7 +5,14 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private bool countedForEntry,countedForLoose;
-    
+    private Rigidbody _physicsOfBall;
+    private SphereCollider _collider;
+
+    private void Awake()
+    {
+        _physicsOfBall = GetComponent<Rigidbody>();
+        _collider = GetComponent<SphereCollider>();
+    }
     public void RandomSpawn(Transform spawnPoint,Transform parent)
     {
         this.transform.SetParent(parent);
@@ -39,6 +46,12 @@ public class Ball : MonoBehaviour
     {
         countedForEntry = false;
         countedForLoose = false;
+        _physicsOfBall.mass = BallConfigurations.Instance.mass;
+        _physicsOfBall.drag = BallConfigurations.Instance.drag;
+        _physicsOfBall.angularDrag= BallConfigurations.Instance.angularDrag;
+        _collider.material.dynamicFriction= BallConfigurations.Instance.dynamicFriction;
+        _collider.material.staticFriction= BallConfigurations.Instance.staticFriction;
+        _collider.material.bounciness= BallConfigurations.Instance.bounciness;
     }
 
 

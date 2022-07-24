@@ -26,17 +26,22 @@ public class GameManager : MonoBehaviour
         
         //Thirdly we should start levelmanager and create level
         LevelManager.INSTANCE.StartLevelManager();
-        
+
+
+        GetPlayerPrefs();
         //Finally we can start our game
         StartGame();
 
     }
     private void StartGame()
     {
-        GetPlayerPrefs();
+        
         _levelFinish = false;
+        
+        SetPlayerPrefs();
         LevelManager.INSTANCE.StartLevel(levelNumber);
-
+        GameEvents.INSTANCE.SetLevelTxt();
+        
     }
     private void GetPlayerPrefs()
     {
@@ -47,9 +52,8 @@ public class GameManager : MonoBehaviour
       
         if (!_levelFinish)
         {
-          
             levelNumber++;
-            PlayerPrefs.SetInt("LevelNumber", levelNumber);
+           
         }
         _levelFinish = true;
     }
@@ -62,7 +66,14 @@ public class GameManager : MonoBehaviour
 
         _levelFinish = true;
     }
-    
+    private void SetPlayerPrefs()
+    {
+        if(levelNumber>LevelConfigurations.Instance.ballNumber.Count-1)
+        {
+            levelNumber = Random.Range(0, LevelConfigurations.Instance.ballNumber.Count);
+        }
+        PlayerPrefs.SetInt("LevelNumber", levelNumber);
+    }
     
 
    

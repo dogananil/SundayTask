@@ -47,4 +47,12 @@ public class GameEvents : MonoBehaviour
             ballToCup();
         }
     }
+    public event Action setLevelTxt;
+    public void SetLevelTxt()
+    {
+        if (setLevelTxt != null)
+        {
+            setLevelTxt();
+        }
+    }
 }

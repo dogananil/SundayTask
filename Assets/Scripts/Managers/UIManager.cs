@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelEndText;
     [SerializeField] private TextMeshProUGUI pressText;
     [SerializeField] private TextMeshProUGUI cupBallText;
+    [SerializeField] private TextMeshProUGUI levelNumberText;
 
     /*[Header("Buttons")]
     [SerializeField] private Button nextButton;
@@ -29,7 +30,7 @@ public class UIManager : MonoBehaviour
         GameEvents.INSTANCE.winGame += SetWinGamePanel;
         GameEvents.INSTANCE.looseGame += SetLooseGamePanel;
         GameEvents.INSTANCE.ballToCup += SetCupBallTxt;
-
+        GameEvents.INSTANCE.setLevelTxt += SetLevelNumberTxt;
     }
     
 
@@ -51,14 +52,17 @@ public class UIManager : MonoBehaviour
     }
     private void NextButton(InputAction.CallbackContext context)
     {
-        Debug.Log("NextLevel");
+       
         levelEndPanel.gameObject.SetActive(false);
         uiInputActions.UI.PressToContinue.performed -= NextButton;
+        int levelNumberTxt = PlayerPrefs.GetInt("LevelNumberTxt", 1);
+        levelNumberTxt++;
+        PlayerPrefs.SetInt("LevelNumberTxt", levelNumberTxt);
         GameEvents.INSTANCE.StartLevel();
     }
     private void TryAgainButton(InputAction.CallbackContext context)
     {
-        Debug.Log("Try Again");
+        
         levelEndPanel.gameObject.SetActive(false);
         uiInputActions.UI.PressToTryAgain.performed -= TryAgainButton;
         GameEvents.INSTANCE.StartLevel();
@@ -69,6 +73,11 @@ public class UIManager : MonoBehaviour
         int collectedBall = LevelManager.INSTANCE.currentLevel._ballNumberInTheCup;
         int desiredNumber = LevelConfigurations.Instance.ballNumber[levelNumber];
         cupBallText.text = collectedBall + "/" + desiredNumber;
+    }
+    private void SetLevelNumberTxt()
+    {
+        int levelNumberTxt = PlayerPrefs.GetInt("LevelNumberTxt", 1);
+        levelNumberText.text = "Level " + levelNumberTxt.ToString();
     }
 
 }

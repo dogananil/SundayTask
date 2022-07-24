@@ -32,7 +32,8 @@ public class Level : MonoBehaviour
         
         _ballNumberInTheCup++;
         GameEvents.INSTANCE.BallToCup();
-        if (_tubeExitBallNumber == _levelBallNumber && (_looseBallNumber+_ballNumberInTheCup)==_tubeExitBallNumber)
+        if (_ballNumberInTheCup>=_desiredBallForLevel/*_tubeExitBallNumber == _levelBallNumber &&*/|| (_looseBallNumber+_ballNumberInTheCup)== _levelBallNumber)
+
         {
             FinishLevel();
            
@@ -41,7 +42,7 @@ public class Level : MonoBehaviour
     public void LooseBall()
     {
         _looseBallNumber++;
-        if (_tubeExitBallNumber == _levelBallNumber && (_looseBallNumber + _ballNumberInTheCup) == _tubeExitBallNumber)
+        if ((_looseBallNumber + _ballNumberInTheCup) == _levelBallNumber)
         {
             FinishLevel();
             

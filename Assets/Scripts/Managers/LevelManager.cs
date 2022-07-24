@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     private GameObject levelCup;
     public List<Level> levelPool = new List<Level>();
     public Level currentLevel;
+    [SerializeField] private Transform _currentLevelParent;
+    private Transform _levelPoolParent;
 
     private List<Ball> levelBalls = new List<Ball>();
 
@@ -37,6 +39,7 @@ public class LevelManager : MonoBehaviour
     }
     public void CreateLevelPool(Transform poolParentTransform)
     {
+        _levelPoolParent = poolParentTransform;
         for(int i=0;i<levels.Count;i++)
         {
             Level newLevel = Instantiate(levels[i], poolParentTransform);
@@ -52,10 +55,15 @@ public class LevelManager : MonoBehaviour
     {
 
         levelCup.SetActive(true);
-        if(currentLevel)
+        if (currentLevel)
+        {
+            currentLevel.transform.SetParent(_levelPoolParent);
             currentLevel.gameObject.SetActive(false);
+        }
+            
         currentLevel = levelPool[levelNumber];
         currentLevel.gameObject.SetActive(true);
+        currentLevel.transform.SetParent(_currentLevelParent);
         levelPool[levelNumber].ResetLevel();
         levelPool[levelNumber].gameObject.SetActive(true);
         ResetLevelBalls();

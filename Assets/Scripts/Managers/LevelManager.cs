@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     private Transform _levelPoolParent;
 
     private List<Ball> levelBalls = new List<Ball>();
-
+    public bool ballSpawning;
 
     private void Awake()
     {
@@ -72,7 +72,10 @@ public class LevelManager : MonoBehaviour
     private IEnumerator SpawnLevelBalls(int ballNumber,float spawnWaitTime)
     {
         int i = 0;
-        while(i<ballNumber)
+        ballSpawning = true;
+        ParticleManager.INSTANCE._sparkle.transform.position = currentLevel.ballSpawnPoint.position;
+        ParticleManager.INSTANCE._sparkle.Play();
+        while (i<ballNumber)
         {
             PoolManager.INSTANCE.ballPool.ballPool[i].ResetBall();
             PoolManager.INSTANCE.ballPool.ballPool[i].RandomSpawn(currentLevel.ballSpawnPoint,currentLevel.transform);
@@ -80,6 +83,8 @@ public class LevelManager : MonoBehaviour
             i++;
             yield return new WaitForSeconds(spawnWaitTime);
         }
+        ParticleManager.INSTANCE._sparkle.Stop();
+        ballSpawning = false;
     }
     private void ResetLevelBalls()
     {

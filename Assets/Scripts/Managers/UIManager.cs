@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class UIManager : MonoBehaviour
     [Header("Panels")]
 
     [SerializeField] private GameObject levelEndPanel;
-    [SerializeField] private GameObject gamePlayPanel;
+    [SerializeField] private GameObject transitionPanel;
 
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI levelEndText;
@@ -18,6 +19,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cupBallText;
     [SerializeField] private TextMeshProUGUI levelNumberText;
 
+    [Header("Transition Curve")]
+    [SerializeField] private AnimationCurve transitionCurve;
     /*[Header("Buttons")]
     [SerializeField] private Button nextButton;
     [SerializeField] private Button tryAgainButton;*/
@@ -42,6 +45,8 @@ public class UIManager : MonoBehaviour
         levelEndText.text = "LEVEL \n COMPLETED!";
         pressText.text = "Press to continue";
         uiInputActions.UI.PressToContinue.performed += NextButton;
+        ParticleManager.INSTANCE._confetti.Play();
+        ParticleManager.INSTANCE._snow.Play();
     }
     private void SetLooseGamePanel()
     {
@@ -58,14 +63,16 @@ public class UIManager : MonoBehaviour
         int levelNumberTxt = PlayerPrefs.GetInt("LevelNumberTxt", 1);
         levelNumberTxt++;
         PlayerPrefs.SetInt("LevelNumberTxt", levelNumberTxt);
-        GameEvents.INSTANCE.StartLevel();
+        StartCoroutine(MakeTransition());
+        
     }
     private void TryAgainButton(InputAction.CallbackContext context)
     {
         
         levelEndPanel.gameObject.SetActive(false);
         uiInputActions.UI.PressToTryAgain.performed -= TryAgainButton;
-        GameEvents.INSTANCE.StartLevel();
+        StartCoroutine(MakeTransition());
+       
     }
     private void SetCupBallTxt()
     {
@@ -78,6 +85,27 @@ public class UIManager : MonoBehaviour
     {
         int levelNumberTxt = PlayerPrefs.GetInt("LevelNumberTxt", 1);
         levelNumberText.text = "Level " + levelNumberTxt.ToString();
+    }
+    private IEnumerator MakeTransition()
+    {
+        float timeLapse = 0, totaltime = 2.0f;
+        Image backgroundImage = transitionPanel.GetComponent<Image>();
+        Color transitionColor=Color.black;
+        transitionColor.a = 0;
+        bool startNewLevel=false;
+        while(timeLapse<=totaltime)
+        {
+            transitionColor.a = transitionCurve.Evaluate(timeLapse / totaltime);
+            backgroundImage.color = transitionColor;
+            timeLapse += Time.deltaTime;
+            if(timeLapse/totaltime>=0.5f && !startNewLevel)
+            {
+                GameEvents.INSTANCE.StartLevel();
+                startNewLevel = true;
+            }
+            yield return null;
+        }
+        
     }
 
 }

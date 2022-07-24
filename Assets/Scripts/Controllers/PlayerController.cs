@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private void GetTouchPos(InputAction.CallbackContext context)
     {
+        if (LevelManager.INSTANCE.ballSpawning) return;
         screenPos = Camera.main.WorldToScreenPoint(LevelManager.INSTANCE.currentLevel.transform.position);
         Vector2 firstLine, secondLine;
         touchPos = context.ReadValue<Vector2>();

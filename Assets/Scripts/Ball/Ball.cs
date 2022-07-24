@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     private Rigidbody _physicsOfBall;
     private SphereCollider _collider;
 
+
     private void Awake()
     {
         _physicsOfBall = GetComponent<Rigidbody>();
@@ -20,6 +21,7 @@ public class Ball : MonoBehaviour
         Vector3 random = (Vector3)Random.insideUnitCircle*0.5f;
 
         transform.position = random + spawnPoint.position;
+      
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -52,6 +54,7 @@ public class Ball : MonoBehaviour
         _collider.material.dynamicFriction= BallConfigurations.Instance.dynamicFriction;
         _collider.material.staticFriction= BallConfigurations.Instance.staticFriction;
         _collider.material.bounciness= BallConfigurations.Instance.bounciness;
+        _physicsOfBall.velocity = Vector3.zero;
     }
 
 

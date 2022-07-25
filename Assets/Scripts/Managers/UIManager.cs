@@ -41,10 +41,11 @@ public class UIManager : MonoBehaviour
 
     private void SetWinGamePanel()
     {
+        Debug.Log("Win Game Panel");
         levelEndPanel.gameObject.SetActive(true);
         levelEndText.text = "LEVEL \n COMPLETED!";
         pressText.text = "Press to continue";
-        uiInputActions.UI.PressToContinue.performed += NextButton;
+        uiInputActions.UI.PressToContinue.started += NextButton;
         ParticleManager.INSTANCE._confetti.Play();
         ParticleManager.INSTANCE._snow.Play();
     }
@@ -53,13 +54,13 @@ public class UIManager : MonoBehaviour
         levelEndPanel.gameObject.SetActive(true);
         levelEndText.text = "LEVEL \n FAILED!";
         pressText.text = "Press to restart";
-        uiInputActions.UI.PressToTryAgain.performed += TryAgainButton;
+        uiInputActions.UI.PressToTryAgain.started += TryAgainButton;
     }
     private void NextButton(InputAction.CallbackContext context)
     {
        
         levelEndPanel.gameObject.SetActive(false);
-        uiInputActions.UI.PressToContinue.performed -= NextButton;
+        uiInputActions.UI.PressToContinue.started -= NextButton;
         int levelNumberTxt = PlayerPrefs.GetInt("LevelNumberTxt", 1);
         levelNumberTxt++;
         PlayerPrefs.SetInt("LevelNumberTxt", levelNumberTxt);
@@ -70,7 +71,7 @@ public class UIManager : MonoBehaviour
     {
         
         levelEndPanel.gameObject.SetActive(false);
-        uiInputActions.UI.PressToTryAgain.performed -= TryAgainButton;
+        uiInputActions.UI.PressToTryAgain.started -= TryAgainButton;
         StartCoroutine(MakeTransition());
        
     }

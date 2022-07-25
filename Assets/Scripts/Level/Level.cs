@@ -9,11 +9,13 @@ public class Level : MonoBehaviour
     public int _ballNumberInTheCup;
     private int _looseBallNumber,_tubeExitBallNumber;
     private int _desiredBallForLevel, _levelBallNumber;
+    private bool levelFinish;
 
     
     public void ResetLevel()
     {
         int levelNumber = PlayerPrefs.GetInt("LevelNumber", 0);
+        levelFinish = false;
         _ballNumberInTheCup = 0;
         _looseBallNumber = 0;
         _tubeExitBallNumber = 0;
@@ -55,6 +57,7 @@ public class Level : MonoBehaviour
     }
     private void FinishLevel()
     {
+        if (levelFinish) return;
         if(_ballNumberInTheCup>=_desiredBallForLevel)
         {
             GameEvents.INSTANCE.WinGame();
@@ -63,5 +66,6 @@ public class Level : MonoBehaviour
         {
             GameEvents.INSTANCE.LooseGame();
         }
+        levelFinish = true; 
     }
 }

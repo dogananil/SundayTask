@@ -105,7 +105,7 @@ public class UIManager : MonoBehaviour
             }
             yield return null;
         }
-        
+        ParticleManager.INSTANCE._confetti.Stop();
     }
 
 }

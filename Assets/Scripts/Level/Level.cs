@@ -25,7 +25,7 @@ public class Level : MonoBehaviour
     }
     public void SetMaterial()
     {
-        GetComponent<MeshRenderer>().material = LevelGeneratorConfiguration.instance.tubeMaterial;
+        GetComponent<MeshRenderer>().material = LevelGeneratorConfiguration.Instance.tubeMaterial;
     }
     public void CountBallInTheCup()
     {

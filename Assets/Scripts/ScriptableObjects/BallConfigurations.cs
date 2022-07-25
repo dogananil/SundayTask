@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName = "Ball Configurations", menuName = "Scriptable Objects/Ball Configurations")]
 public class BallConfigurations : SingletonScriptableObjects<BallConfigurations>
 {

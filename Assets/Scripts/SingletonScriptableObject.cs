@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
 public abstract class SingletonScriptableObjects<T> : ScriptableObject where T :SingletonScriptableObjects<T>
 {
     private static T _instance = null;
